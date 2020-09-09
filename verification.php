@@ -345,7 +345,7 @@
                         $('#verification_err').css({display: "block"});
                     }
                     else {
-                        window.location.href = "login.php";
+                        window.location.replace("login.php");
                     }
                 },
                 complete:function(data){

@@ -110,6 +110,7 @@
                         <form action="api/login.php" method="POST" class="register-form" id="login-form">
                             <div class="form-group">
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <!-- <span class="input-group-addon">Prefix</span> -->
                                 <input type="text" name="username" id="username" placeholder="username" required/>
                             </div>
                             <div class="form-group">
@@ -175,7 +176,7 @@
                         }
                         else {
                             // alert(response.message)
-                            window.location.href = "index.php"
+                            window.location.replace("index.php")
                         }
 
                     },
