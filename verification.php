@@ -113,10 +113,81 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <style>
+
+        #tooltip {
+            position: relative;
+        }
+
+        #tooltip #tooltipText {
+            visibility: hidden;
+            width: 100px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px;
+        }
+
+        #tooltip:hover #tooltipText {
+            visibility: visible;
+        }
+
+        #overlay{	
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height:100%;
+            display: none;
+            background: rgba(255,255,255,0.7);
+        }
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px #ddd solid;
+            border-top: 4px #f46f25 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+        @keyframes sp-anime {
+            100% { 
+                transform: rotate(360deg); 
+            }
+        }
+        .is-hide{
+            display:none;
+        }
+
+    </style>
+
+
 </head>
 
 <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
     
+    <!-- Spinner Loading -->
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+    <!-- End of spinner loading -->
+
+
     <!-- HIDDEN PREHEADER TEXT -->
     <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"> We're thrilled to have you here! Get ready to dive into your new account. </div>
     
@@ -223,7 +294,7 @@
                     method:"POST",
                     data: {id: id, verification: verification},
                     beforeSend: function(){
-                        
+                        $("#overlay").fadeIn(300);
                     },
                     success:function(data)
                     {
@@ -239,6 +310,9 @@
                             activate(id); // Activate                          
                         }
 
+                    },
+                    complete:function(data){
+                        $("#overlay").fadeOut(300);
                     }
 
                 });
@@ -260,7 +334,7 @@
                 method:"POST",
                 data: {id: id},
                 beforeSend: function(){
-                    alert('YEs')
+                    $("#overlay").fadeIn(300);
                 },
                 success:function(data)
                 {
@@ -273,6 +347,9 @@
                     else {
                         window.location.href = "login.php";
                     }
+                },
+                complete:function(data){
+                    $("#overlay").fadeOut(300);
                 }
 
             });

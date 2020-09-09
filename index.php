@@ -25,10 +25,82 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+
+        #tooltip {
+            position: relative;
+        }
+
+        #tooltip #tooltipText {
+            visibility: hidden;
+            width: 100px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px;
+        }
+
+        #tooltip:hover #tooltipText {
+            visibility: visible;
+        }
+
+        #overlay{	
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height:100%;
+            display: none;
+            background: rgba(255,255,255,0.7);
+        }
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px #ddd solid;
+            border-top: 4px #f46f25 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+        @keyframes sp-anime {
+            100% { 
+                transform: rotate(360deg); 
+            }
+        }
+        .is-hide{
+            display:none;
+        }
+
+    </style>
+
+
 </head>
 <body>
 
     <div class="main" style="background-color:gainsboro;">
+
+        <!-- Spinner Loading -->
+        <div id="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
+        <!-- End of spinner loading -->
+
 
         <!-- Note form -->
         <section class="signup">
@@ -196,7 +268,7 @@
                 method:"POST",
                 data: {id: id},
                 beforeSend: function(){
-                    
+                    $("#overlay").fadeIn(300);
                 },
                 success:function(data)
                 {
@@ -236,6 +308,9 @@
                         // console.log(response.data.length)
                     }
 
+                },
+                complete:function(data){
+                    $("#overlay").fadeOut(300);
                 }
 
             });
@@ -260,7 +335,8 @@
                     method:"POST",
                     data: {id: id,title: title, body: body},
                     beforeSend: function(){
-                        
+                        $("#overlay").fadeIn(300);
+                        $('#dismissModal').click()
                     },
                     success:function(data)
                     {
@@ -283,6 +359,9 @@
                             $('#dismissModal').click()
                         }
 
+                    },
+                    complete:function(data){
+                        $("#overlay").fadeOut(300);
                     }
 
                 });
@@ -315,7 +394,8 @@
                     method:"POST",
                     data: {id: id,title: title, body: body},
                     beforeSend: function(){
-                        
+                        $("#overlay").fadeIn(300);
+                        $('#edit_dismissModal').click()
                     },
                     success:function(data)
                     {
@@ -327,6 +407,7 @@
                             $('#note_err').css({display: "block"});
                             $('#note_reg_err').css({display: "none"});
                             $('#note_delete_err').css({display: "none"});
+                            $('.edit_modal').click();
                         }
                         else {
                             $('#note_reg_err').html(response.message)
@@ -338,6 +419,9 @@
                             $('#edit_dismissModal').click()
                         }
 
+                    },
+                    complete:function(data){
+                        $("#overlay").fadeOut(300);
                     }
 
                 });
@@ -384,7 +468,7 @@
                 method:"POST",
                 data: {id: id},
                 beforeSend: function(){
-                    
+                    $("#overlay").fadeIn(300);
                 },
                 success:function(data)
                 {
@@ -406,6 +490,9 @@
                         fetch()
                     }
 
+                },
+                complete:function(data){
+                    $("#overlay").fadeOut(300);
                 }
 
             });
