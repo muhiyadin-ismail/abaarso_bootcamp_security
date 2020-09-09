@@ -22,8 +22,7 @@
         // if username or password is wrong
         if($stmt->num_rows === 0)
         {   
-            $response['error'] = true;
-            $response['message'] = "Verification code is wrong";
+            $response['verified'] = false;
         }
         else {
 
@@ -33,16 +32,14 @@
             // fetch data
             $stmt->fetch();
 
-            $response['error'] = false;
-            $response['message'] = "verified successfully";
+            $response['verified'] = true;
         }
         
     }
     
     else{
 
-        $response['error'] = true;
-        $response['message'] = "Invalid request";
+        $response['verified'] = false;
     }
 
     $json_response = json_encode($response);

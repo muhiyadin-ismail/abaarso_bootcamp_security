@@ -17,10 +17,19 @@
         
         // if insertion is ok no problem
         if ($stmt -> execute()) {
+
+            // start session
+            session_start();
+
+            $_SESSION['id'] = $id;
+            $_SESSION['username'] = "";
+
+                            
             $response['error'] = false;
             $response['message'] = "User activated successfully ID: " . $id;
         }
         else {
+            
             $response['error'] = true;
             $response['message'] = "ERROR: " . mysqli_error($conn) ;
         }

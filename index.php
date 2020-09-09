@@ -108,7 +108,7 @@
 
                 <div class="signup-content">
                     <div class="signup-form">
-                        <h4 class="form-title">WELCOME </h4>
+                        <h4 class="form-title">WELCOME  </h4>
 
                         <div class="alert alert-danger" id="note_err" role="alert" style="display: none"></div>
                         <div class="alert alert-success" id="note_reg_err" role="alert" style="display: none"></div>
@@ -317,6 +317,28 @@
 
         }
 
+
+        get_user_data()
+        function get_user_data() {
+            var id = "<?php echo $_SESSION['id']; ?>";
+            $.ajax({
+
+                url:"api/fetch_user_data.php",
+                method:"POST",
+                data: {id: id},
+                beforeSend: function(){
+                    $("#overlay").fadeIn(300);
+                },
+                success:function(data)
+                {
+
+                },
+                complete:function(data){
+                    $("#overlay").fadeOut(300);
+                }
+
+            });
+        }
 
 
         $('.note-form').on('submit', function(e) {

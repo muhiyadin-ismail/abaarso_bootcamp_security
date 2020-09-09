@@ -111,8 +111,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="phone"><i class="zmdi zmdi-phone"></i></label>
-                                <input type="tel" pattern=".{7,}" name="phone" id="phone" placeholder="Your Phone number" required/>
+                                <label for="phone"><i>063</i></label>
+                                <input type="tel" pattern=".{7}" name="phone" id="phone" placeholder="4xxxxxx" required/>
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>

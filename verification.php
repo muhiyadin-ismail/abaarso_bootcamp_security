@@ -302,8 +302,8 @@
                         var response = JSON.parse(JSON.stringify(data))
 
 
-                        if (response.error === true) {
-                            $('#verification_err').html(response.message)
+                        if (response.verified === false) {
+                            $('#verification_err').html("Invalid code PLEASE TRY AGAIN LATER !!")
                             $('#verification_err').css({display: "block"});
                         }
                         else {
@@ -328,7 +328,7 @@
 
         })
 
-        function activate(id) {
+        function activate(id,username) {
             $.ajax({
                 url:"api/activate.php",
                 method:"POST",
@@ -345,7 +345,8 @@
                         $('#verification_err').css({display: "block"});
                     }
                     else {
-                        window.location.replace("login.php");
+                        // alert('Verified')
+                        // window.location.replace("index.php");
                     }
                 },
                 complete:function(data){
