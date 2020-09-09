@@ -24,9 +24,26 @@
         
         // if insertion is ok no problem
         if ($stmt -> execute()) {
-            $response['error'] = false;
-            $response['reg_id'] = $conn->insert_id;
-            $response['message'] = "User registered successfully ID: " . $conn->insert_id;
+
+            $user_id = $conn->insert_id;
+            $verification = rand(1000,9999);
+
+            $ISERT = "INSERT INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
+            $inst = $connection -> prepare($ISERT);
+            $inst->bind_param("ssss", $user_id, $name, $verification, $regDate);
+            
+            // if insertion is ok no problem
+            if ($inst -> execute()) {
+                $response['error'] = false;
+                $response['reg_id'] = $user_id;
+                $response['message'] = "User registered successfully ID: " . $user_id;
+            }
+            else {
+                $response['error'] = true;
+                $response['message'] = "ERROR: User registered but unable to generate verification code";
+            }
+
+            
         }
         else {
             $response['error'] = true;

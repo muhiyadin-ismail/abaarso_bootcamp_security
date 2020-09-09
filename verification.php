@@ -301,7 +301,7 @@
                         
                         var response = JSON.parse(JSON.stringify(data))
 
-
+                        alert(response.verified)
                         if (response.verified === false) {
                             $('#verification_err').html("Invalid code PLEASE TRY AGAIN LATER !!")
                             $('#verification_err').css({display: "block"});
@@ -346,7 +346,7 @@
                     }
                     else {
                         // alert('Verified')
-                        // window.location.replace("index.php");
+                        window.location.replace("index.php");
                     }
                 },
                 complete:function(data){

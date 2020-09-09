@@ -257,8 +257,10 @@
 
     <script>
         $('#name').focus();
-
+        
+        get_user_data()
         fetch()
+
         function fetch() {
 
             var id = "<?php echo $_SESSION['id']; ?>";
@@ -316,9 +318,7 @@
             });
 
         }
-
-
-        get_user_data()
+        
         function get_user_data() {
             var id = "<?php echo $_SESSION['id']; ?>";
             $.ajax({
