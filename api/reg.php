@@ -2,6 +2,7 @@
 
 
     header("Content-Type:application/json");
+    require_once('twilio.php');
 
     $response = array();
 
@@ -27,6 +28,8 @@
 
             $user_id = $conn->insert_id;
             $verification = rand(1000,9999);
+
+            send_otp($verification);
 
             $ISERT = "REPLACE INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
             $inst = $connection -> prepare($ISERT);
