@@ -1,3 +1,11 @@
+<?php
+
+    if(!isset($_POST['id'])) {
+        header('location: login.php');
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,42 +104,35 @@
                   
 
                     <div class="signin-image">
-                        <figure><img src="assets/images/two.webp" alt="sing up image"></figure>
+                        <figure><img src="assets/images/one.jpg" alt="sing up image"></figure>
                         <a href="registeration.php" class="signup-image-link">Create an account</a>
+                        <a href="login.php" class="signup-image-link">I am already member</a>
+                        
                     </div>
 
                     <div class="signin-form">
 
                         <div class="alert alert-danger" role="alert" id="login_err" style="display: none"></div>
 
-                        <h2 class="form-title">Sign in</h2>
+                        <h2 class="form-title">Change Password</h2>
                         <form action="api/login.php" method="POST" class="register-form" id="login-form">
-                            <div class="form-group">
-                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <!-- <span class="input-group-addon">Prefix</span> -->
-                                <input type="text" name="username" id="username" placeholder="username" required/>
-                            </div>
+                            
+                            <input type="hidden" id="id" name="id" value="<?php echo $_POST['id']; ?>">
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="password" placeholder="Password" required />
+                                <input type="password" name="pass" id="pass" placeholder="Password" required/>
                             </div>
+
                            
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                <input type="submit" name="signin" id="forget_pass" class="form-submit" value="Change password"/>
                             </div>
                         </form>
-
-                        <a href="forget.php" class="signup-image-link">Forget password</a>
 
                     </div>
                 </div>
             </div>
         </section>
-
-        <form action="verification.php" method="POST">
-            <input type="hidden" id="verification_id" name="id">
-            <input type="submit" style="display: none" value="gotoverifiation" id="verification">
-        </form>
 
     </div>
 
@@ -144,16 +145,17 @@
 
         $('#login-form').on('submit', function(e) {
 
-            if( $('#username').val() !== '' ||  $('#password').val() !== '') {
+            
+            if( $('#id').val() !== '' || $('#pass').val() !== '') {
                 
                 e.preventDefault()
-                var username = $('#username').val();
-                var password = $('#password').val();
+                var id = $('#id').val();
+                var pass = $('#pass').val();
 
                 $.ajax({
-                    url:"api/login.php",
+                    url:"api/change_password.php",
                     method:"POST",
-                    data: {username: username ,pass: password},
+                    data: {id: id,pass: pass},
                     beforeSend: function(){
                         $("#overlay").fadeIn(300);
                     },
@@ -163,19 +165,11 @@
                         var response = JSON.parse(JSON.stringify(data))
                         
                         if (response.error === true) {
-
-                            if(response.message === "This user not activated") {
-                                $('#verification_id').val(response.id)
-                                $('#verification').click()
-                            }
-                            else {
                                 $('#login_err').html(response.message)
                                 $('#login_err').css({display: "block"});
-                            }
-
                         }
                         else {
-                            // alert(response.message)
+
                             window.location.replace("index.php")
                         }
 

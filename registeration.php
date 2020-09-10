@@ -134,6 +134,7 @@
 
         <form action="verification.php" method="POST">
             <input type="hidden" id="verification_id" name="id">
+            <input type="text" id="type" name="type" value="registeration">
             <input type="submit" style="display: none" value="gotoverifiation" id="verification">
         </form>
 

@@ -98,30 +98,27 @@
                     <div class="signin-image">
                         <figure><img src="assets/images/two.webp" alt="sing up image"></figure>
                         <a href="registeration.php" class="signup-image-link">Create an account</a>
+                        <a href="login.php" class="signup-image-link">I am already member</a>
+                        
                     </div>
 
                     <div class="signin-form">
 
                         <div class="alert alert-danger" role="alert" id="login_err" style="display: none"></div>
 
-                        <h2 class="form-title">Sign in</h2>
+                        <h2 class="form-title">Forget Password</h2>
                         <form action="api/login.php" method="POST" class="register-form" id="login-form">
+                            
                             <div class="form-group">
-                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <!-- <span class="input-group-addon">Prefix</span> -->
-                                <input type="text" name="username" id="username" placeholder="username" required/>
+                                <label for="phone"><i class="zmdi zmdi-phone"></i></label>
+                                <input type="tel" name="phone" id="phone" placeholder="Your Phone number" required/>
                             </div>
-                            <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="password" placeholder="Password" required />
-                            </div>
+
                            
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                <input type="submit" name="signin" id="forget_pass" class="form-submit" value="Forget"/>
                             </div>
                         </form>
-
-                        <a href="forget.php" class="signup-image-link">Forget password</a>
 
                     </div>
                 </div>
@@ -130,6 +127,7 @@
 
         <form action="verification.php" method="POST">
             <input type="hidden" id="verification_id" name="id">
+            <input type="text" id="type" name="type" value="forget">
             <input type="submit" style="display: none" value="gotoverifiation" id="verification">
         </form>
 
@@ -144,16 +142,15 @@
 
         $('#login-form').on('submit', function(e) {
 
-            if( $('#username').val() !== '' ||  $('#password').val() !== '') {
+            if( $('#phone').val() !== '') {
                 
                 e.preventDefault()
-                var username = $('#username').val();
-                var password = $('#password').val();
+                var phone = $('#phone').val();
 
                 $.ajax({
-                    url:"api/login.php",
+                    url:"api/forget_password.php",
                     method:"POST",
-                    data: {username: username ,pass: password},
+                    data: {phone: phone},
                     beforeSend: function(){
                         $("#overlay").fadeIn(300);
                     },
@@ -163,20 +160,15 @@
                         var response = JSON.parse(JSON.stringify(data))
                         
                         if (response.error === true) {
-
-                            if(response.message === "This user not activated") {
-                                $('#verification_id').val(response.id)
-                                $('#verification').click()
-                            }
-                            else {
                                 $('#login_err').html(response.message)
                                 $('#login_err').css({display: "block"});
-                            }
-
                         }
                         else {
+
+                            $('#verification_id').val(response.reg_id)
+                            $('#verification').click()
                             // alert(response.message)
-                            window.location.replace("index.php")
+                            // window.location.replace("index.php")
                         }
 
                     },

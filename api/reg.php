@@ -28,7 +28,7 @@
             $user_id = $conn->insert_id;
             $verification = rand(1000,9999);
 
-            $ISERT = "INSERT INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
+            $ISERT = "REPLACE INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
             $inst = $connection -> prepare($ISERT);
             $inst->bind_param("ssss", $user_id, $name, $verification, $regDate);
             

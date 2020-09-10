@@ -238,6 +238,7 @@
                                                         <div class="alert alert-danger" id="verification_err" style="display: none" role="alert"></div>
 
                                                     <input type="hidden" value="<?php echo $_POST['id']; ?>" name="id" id="id">
+                                                    <input type="hidden" value="<?php echo $_POST['type']; ?>" name="type" id="type">
                                                     <div class="form-group">
                                                         <input type="number" name="verification" id="verification" placeholder="xxxx" required/>
                                                     </div>
@@ -271,6 +272,12 @@
             </td>
         </tr>
         
+        <form action="change_pass.php" method="POST">
+            <input type="hidden" id="change_id" name="id">
+            <input type="submit" style="display: none" value="gotoverifiation" id="changePassword">
+        </form>
+
+
     </table>
 
     <!-- JS -->
@@ -301,13 +308,22 @@
                         
                         var response = JSON.parse(JSON.stringify(data))
 
-                        alert(response.verified)
+                        // alert(response.verified)
                         if (response.verified === false) {
                             $('#verification_err').html("Invalid code PLEASE TRY AGAIN LATER !!")
                             $('#verification_err').css({display: "block"});
                         }
                         else {
-                            activate(id); // Activate                          
+
+                            if($('#type').val() === "forget") {
+                                $('#change_id').val(id)
+                                $('#changePassword').click();
+                                // window.location.replace('change_pass.php')
+                            }
+                            else {
+                                activate(id); // Activate 
+                            }
+                                                     
                         }
 
                     },
