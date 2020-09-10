@@ -121,7 +121,7 @@
                             </div>
                         </form>
 
-                        <a href="forget.php" class="signup-image-link">Forget password</a>
+                        <!-- <a href="forget.php" class="signup-image-link">Forget password</a> -->
 
                     </div>
                 </div>

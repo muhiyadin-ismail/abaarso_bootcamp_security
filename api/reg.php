@@ -27,24 +27,33 @@
         if ($stmt -> execute()) {
 
             $user_id = $conn->insert_id;
-            $verification = rand(1000,9999);
 
-            send_otp($verification);
 
-            $ISERT = "REPLACE INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
-            $inst = $connection -> prepare($ISERT);
-            $inst->bind_param("ssss", $user_id, $name, $verification, $regDate);
+             // start session
+             session_start();
+
+             $_SESSION['id'] = $user_id;
+             $_SESSION['username'] = $username;
+
+            // $verification = rand(1000,9999);
+
+            // $to = "+25263". $phone;
+            // send_otp($to,$verification);
+
+            // $ISERT = "REPLACE INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
+            // $inst = $connection -> prepare($ISERT);
+            // $inst->bind_param("ssss", $user_id, $name, $verification, $regDate);
             
-            // if insertion is ok no problem
-            if ($inst -> execute()) {
+            // // if insertion is ok no problem
+            // if ($inst -> execute()) {
                 $response['error'] = false;
-                $response['reg_id'] = $user_id;
+            //     $response['reg_id'] = $user_id;
                 $response['message'] = "User registered successfully ID: " . $user_id;
-            }
-            else {
-                $response['error'] = true;
-                $response['message'] = "ERROR: User registered but unable to generate verification code";
-            }
+            // }
+            // else {
+            //     $response['error'] = true;
+            //     $response['message'] = "ERROR: User registered but unable to generate verification code";
+            // }
 
             
         }

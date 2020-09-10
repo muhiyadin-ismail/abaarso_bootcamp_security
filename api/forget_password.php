@@ -1,7 +1,8 @@
 <?php
 
     header("Content-Type:application/json");
-
+    require_once('twilio.php');
+    
     $response = array();
 
     if(isset($_POST['phone'])) {
@@ -39,6 +40,9 @@
 
                 $user_id = $id;
                 $verification = rand(1000,9999);
+
+                $to = "+25263". $phone;
+                send_otp($to,$verification)
 
                 $ISERT = "REPLACE INTO `verification`(`id`, `name`, `verification`, `date`) VALUES (?,?,?,?)";
                 $inst = $connection -> prepare($ISERT);

@@ -124,8 +124,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="phone"><i class="zmdi zmdi-phone"></i></label>
-                                <input type="tel" name="phone" id="phone" placeholder="Your Phone number" required/>
+                                <label for="phone"><i>063</i></label>
+                                <input type="tel" name="phone" id="phone" pattern=".{7}" placeholder="4xxxxxx" required/>
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
@@ -185,7 +185,7 @@
                     $('#name').val(response.name)
                     $('#username').val(response.username)
                     $('#phone').val(response.phone)
-                    $('#pass').val("password")
+                    $('#pass').val("")
                 }
 
             },

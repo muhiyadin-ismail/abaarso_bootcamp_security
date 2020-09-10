@@ -134,7 +134,7 @@
 
         <form action="verification.php" method="POST">
             <input type="hidden" id="verification_id" name="id">
-            <input type="text" id="type" name="type" value="registeration">
+            <input type="hidden" id="type" name="type" value="registeration">
             <input type="submit" style="display: none" value="gotoverifiation" id="verification">
         </form>
 
@@ -174,9 +174,9 @@
                             $('#registertion_err').css({display: "block"});
                         }
                         else {
-                            // window.location.href = "verification.php"
-                            $('#verification_id').val(response.reg_id)
-                            $('#verification').click()
+                            window.location.replace("index.php");
+                            // $('#verification_id').val(response.reg_id)
+                            // $('#verification').click()
                         }
 
                     },

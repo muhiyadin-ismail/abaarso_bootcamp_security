@@ -33,21 +33,21 @@
              // fetch data
              $stmt->fetch();
 
-             $SELECT = "SELECT `activated` FROM `activation` WHERE `id`=? ";
-             $show = $conn -> prepare($SELECT);
-             $show->bind_param("s", $id);
+            //  $SELECT = "SELECT `activated` FROM `activation` WHERE `id`=? ";
+            //  $show = $conn -> prepare($SELECT);
+            //  $show->bind_param("s", $id);
      
-             $show->execute();
+            //  $show->execute();
      
-             $show->store_result();
+            //  $show->store_result();
      
-             // if username or password is wrong
-             if($show->num_rows === 0) {
-                $response['error'] = true;
-                $response['id'] = $id;
-                $response['message'] = "This user not activated";    
-             }   
-             else {
+            //  // if username or password is wrong
+            //  if($show->num_rows === 0) {
+            //     $response['error'] = true;
+            //     $response['id'] = $id;
+            //     $response['message'] = "This user not activated";    
+            //  }   
+            //  else {
                 
                 // start session
                 session_start();
@@ -57,7 +57,7 @@
 
                 $response['error'] = false;
                 $response['message'] = "Login is successfull ";
-             }  
+            //  }  
 
    
 

@@ -1,6 +1,6 @@
 <?php
 
-    function send_otp($body) {
+    function send_otp($to,$body) {
             
             $to = '+252634778031';
             $from = '+18647744641';

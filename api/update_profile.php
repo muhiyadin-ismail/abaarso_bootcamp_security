@@ -18,7 +18,7 @@
         $username = $_POST['username'];
         $phone = $_POST['phone'];
 
-        if($_POST['pass'] === "password") {
+        if($_POST['pass'] === "") {
             $UPDATE = "UPDATE `users` SET `name`=?,`username`=?,`phone`=? WHERE `id`=?";
             $stmt = $conn -> prepare($UPDATE);
             $stmt->bind_param("ssss", $name, $username, $phone, $id);

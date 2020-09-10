@@ -110,8 +110,8 @@
                         <form action="api/login.php" method="POST" class="register-form" id="login-form">
                             
                             <div class="form-group">
-                                <label for="phone"><i class="zmdi zmdi-phone"></i></label>
-                                <input type="tel" name="phone" id="phone" placeholder="Your Phone number" required/>
+                                <label for="phone"><i>063</i></label>
+                                <input type="tel" name="phone" pattern=".{7}" id="phone" placeholder="4xxxxxx" required/>
                             </div>
 
                            
